@@ -53,40 +53,6 @@ const CloseIcon = () => (
   </svg>
 )
 
-/* ── Data ── */
-const services = [
-  {
-    title: 'Lawn Mowing',
-    desc: 'Regular mowing with precision cutting, clean edges, and clippings removal. Your lawn stays fresh and healthy all season.',
-    icon: '🌿',
-  },
-  {
-    title: 'Trimming & Edging',
-    desc: 'Crisp borders along walkways, driveways, and garden beds. The details that make your yard look professionally maintained.',
-    icon: '✂️',
-  },
-  {
-    title: 'Seasonal Cleanup',
-    desc: 'Spring and fall cleanup including leaf removal, debris clearing, and bed preparation to keep your property looking its best.',
-    icon: '🍂',
-  },
-  {
-    title: 'Fertilization',
-    desc: 'Custom fertilization programs that promote thick, green growth and protect against weeds and disease.',
-    icon: '🌱',
-  },
-  {
-    title: 'Hedge Trimming',
-    desc: 'Shaping and maintaining hedges, shrubs, and ornamental plants. Clean lines that frame your landscape beautifully.',
-    icon: '🌳',
-  },
-  {
-    title: 'Mulching',
-    desc: 'Fresh mulch installation for garden beds and tree rings. Improves moisture retention and gives your landscape a polished finish.',
-    icon: '🪵',
-  },
-]
-
 /* ── Nav ── */
 function Navbar() {
   const [open, setOpen] = useState(false)
@@ -121,7 +87,6 @@ function Navbar() {
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
           {[
-            { label: 'Services', href: '#services' },
             { label: 'Our Work', href: '#work' },
             { label: 'About', href: '#about' },
             { label: 'Quote', href: '#quote' },
@@ -159,7 +124,6 @@ function Navbar() {
         <div className="md:hidden bg-bark-50/98 backdrop-blur-lg border-t border-bark-200/50 shadow-lg">
           <div className="px-6 py-6 flex flex-col gap-4">
             {[
-              { label: 'Services', href: '#services' },
               { label: 'Our Work', href: '#work' },
               { label: 'About', href: '#about' },
               { label: 'Quote', href: '#quote' },
@@ -251,43 +215,6 @@ function Hero() {
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-60">
         <span className="text-white/60 text-xs uppercase tracking-[0.15em]">Scroll</span>
         <div className="w-px h-8 bg-gradient-to-b from-white/40 to-transparent" />
-      </div>
-    </section>
-  )
-}
-
-/* ── Services ── */
-function Services() {
-  return (
-    <section id="services" className="relative py-24 md:py-32 bg-bark-50 grain-overlay overflow-hidden">
-      {/* Decorative gradient blob */}
-      <div className="absolute -top-40 -right-40 w-96 h-96 bg-moss-300/15 rounded-full blur-3xl" />
-      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-moss-400/10 rounded-full blur-3xl" />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
-        <RevealDiv className="text-center mb-16 md:mb-20">
-          <span className="text-moss-600 text-sm font-semibold uppercase tracking-[0.2em] mb-4 block">What We Do</span>
-          <h2 className="font-display text-3xl md:text-5xl font-bold text-moss-950 mb-4">
-            Services Built Around{' '}
-            <span className="italic text-moss-600">Your Yard</span>
-          </h2>
-          <p className="text-bark-500 text-lg max-w-xl mx-auto">
-            From weekly mowing to seasonal cleanups, we handle every detail so your property always looks its best.
-          </p>
-        </RevealDiv>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
-          {services.map((s) => (
-            <RevealDiv
-              key={s.title}
-              className="group bg-white rounded-2xl p-7 shadow-[0_2px_12px_rgba(26,46,19,0.06)] hover:shadow-[0_8px_30px_rgba(90,154,58,0.12)] border border-bark-100 hover:border-moss-200 transition-all duration-300 hover:-translate-y-1"
-            >
-              <span className="text-3xl mb-4 block">{s.icon}</span>
-              <h3 className="font-display text-xl font-bold text-moss-900 mb-2">{s.title}</h3>
-              <p className="text-bark-500 text-sm leading-relaxed">{s.desc}</p>
-            </RevealDiv>
-          ))}
-        </div>
       </div>
     </section>
   )
@@ -634,7 +561,6 @@ function Footer() {
 
           {/* Links */}
           <div className="flex flex-wrap gap-6 text-sm">
-            <a href="#services" className="hover:text-moss-400 transition-colors">Services</a>
             <a href="#work" className="hover:text-moss-400 transition-colors">Our Work</a>
             <a href="#about" className="hover:text-moss-400 transition-colors">About</a>
             <a href="#quote" className="hover:text-moss-400 transition-colors">Get a Quote</a>
@@ -658,7 +584,6 @@ function App() {
       <Navbar />
       <main id="main">
         <Hero />
-        <Services />
         <OurWork />
         <About />
         <QuoteForm />
