@@ -120,13 +120,18 @@ function Navbar() {
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
-          {['Services', 'About', 'Quote'].map((item) => (
+          {[
+            { label: 'Services', href: '#services' },
+            { label: 'Our Work', href: '#work' },
+            { label: 'About', href: '#about' },
+            { label: 'Quote', href: '#quote' },
+          ].map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+              key={item.label}
+              href={item.href}
               className={`text-sm font-medium tracking-wide transition-colors duration-200 hover:text-moss-500 ${scrolled ? 'text-bark-700' : 'text-bark-100'}`}
             >
-              {item}
+              {item.label}
             </a>
           ))}
           <a
@@ -153,14 +158,19 @@ function Navbar() {
       {open && (
         <div className="md:hidden bg-bark-50/98 backdrop-blur-lg border-t border-bark-200/50 shadow-lg">
           <div className="px-6 py-6 flex flex-col gap-4">
-            {['Services', 'About', 'Quote'].map((item) => (
+            {[
+              { label: 'Services', href: '#services' },
+              { label: 'Our Work', href: '#work' },
+              { label: 'About', href: '#about' },
+              { label: 'Quote', href: '#quote' },
+            ].map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.label}
+                href={item.href}
                 onClick={() => setOpen(false)}
                 className="text-bark-800 font-medium text-base py-2 hover:text-moss-600 transition-colors"
               >
-                {item}
+                {item.label}
               </a>
             ))}
             <a
@@ -184,9 +194,10 @@ function Hero() {
       {/* Background image with overlay */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1920&q=80&auto=format"
+          src="/media/hero-stripes.jpg"
           alt=""
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-center"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-moss-950/70 via-moss-900/50 to-moss-950/80" />
         <div className="absolute inset-0 bg-gradient-to-r from-moss-950/40 to-transparent" />
@@ -282,6 +293,99 @@ function Services() {
   )
 }
 
+/* ── Our Work ── */
+const gallery = [
+  {
+    src: '/media/work-mowing.jpg',
+    alt: 'Freshly mowed lawn with clean diagonal stripes beside a Terrazas Lawn Care trailer.',
+    title: 'Weekly Mowing',
+    meta: 'Clean stripes, every visit',
+    span: 'md:col-span-2',
+    position: 'object-center',
+  },
+  {
+    src: '/media/work-mulch.jpg',
+    alt: 'Freshly installed black mulch ring around a shrub bed on a manicured lawn.',
+    title: 'Mulch Installation',
+    meta: 'Fresh beds, neat edges',
+    position: 'object-center',
+  },
+  {
+    src: '/media/work-edging.jpg',
+    alt: 'Walkway with sharp trimmed edges along a mulched bed and solar-lit path lights.',
+    title: 'Trimming & Edging',
+    meta: 'Crisp lines along walkways',
+    position: 'object-top',
+  },
+  {
+    src: '/media/work-beds.jpg',
+    alt: 'Landscaped front yard with flowering shrubs, river rock beds, and boxwood plantings.',
+    title: 'Landscape Care',
+    meta: 'Beds, shrubs, and borders',
+    position: 'object-center',
+  },
+  {
+    src: '/media/work-spring.jpg',
+    alt: 'Spring yard with a blooming magnolia tree, fresh mulch beds, and a freshly cut green lawn.',
+    title: 'Spring Cleanup',
+    meta: 'Prepped for the season',
+    position: 'object-center',
+  },
+]
+
+function OurWork() {
+  return (
+    <section id="work" className="relative py-24 md:py-32 bg-white overflow-hidden">
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        <RevealDiv className="text-center mb-16 md:mb-20">
+          <span className="text-moss-600 text-sm font-semibold uppercase tracking-[0.2em] mb-4 block">Our Work</span>
+          <h2 className="font-display text-3xl md:text-5xl font-bold text-moss-950 mb-4">
+            Recent Jobs Around{' '}
+            <span className="italic text-moss-600">Indianapolis</span>
+          </h2>
+          <p className="text-bark-500 text-lg max-w-xl mx-auto">
+            Real photos from real properties. Clean lines, fresh mulch, and lawns we are proud to put our name on.
+          </p>
+        </RevealDiv>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[280px] gap-4 md:gap-5 stagger">
+          {gallery.map((g) => (
+            <RevealDiv
+              key={g.src}
+              className={`group relative rounded-2xl overflow-hidden shadow-[0_2px_12px_rgba(26,46,19,0.08)] hover:shadow-[0_12px_40px_rgba(26,46,19,0.18)] transition-shadow duration-500 ${g.span || ''}`}
+            >
+              <img
+                src={g.src}
+                alt={g.alt}
+                loading="lazy"
+                className={`absolute inset-0 w-full h-full object-cover ${g.position || 'object-center'} transition-transform duration-700 ease-out group-hover:scale-[1.04]`}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-moss-950/85 via-moss-950/10 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+                <span className="block text-moss-200 text-[11px] font-semibold uppercase tracking-[0.18em] mb-1">
+                  {g.meta}
+                </span>
+                <h3 className="font-display text-white text-xl md:text-2xl font-bold leading-tight">
+                  {g.title}
+                </h3>
+              </div>
+            </RevealDiv>
+          ))}
+        </div>
+
+        <RevealDiv className="mt-12 md:mt-16 text-center">
+          <a
+            href="#quote"
+            className="inline-flex items-center gap-2 bg-moss-600 text-white px-7 py-3.5 rounded-full text-sm font-semibold shadow-[0_8px_30px_rgba(90,154,58,0.35)] hover:bg-moss-500 hover:shadow-[0_12px_40px_rgba(90,154,58,0.5)] active:scale-95 transition-all duration-200"
+          >
+            Get your yard on this list
+          </a>
+        </RevealDiv>
+      </div>
+    </section>
+  )
+}
+
 /* ── About ── */
 function About() {
   return (
@@ -295,9 +399,9 @@ function About() {
           <RevealDiv className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
               <img
-                src="https://placehold.co/800x480/2d4c20/a8d08c?text=Oscar%27s+Work+Photos+Here"
-                alt="Terrazas Lawn Care work"
-                className="w-full h-[400px] md:h-[480px] object-cover"
+                src="/media/about-property.jpg"
+                alt="Full property lawn care by Terrazas: fresh mulch beds, clean edging, and a manicured green lawn in Indianapolis."
+                className="w-full h-[400px] md:h-[480px] object-cover object-center"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-moss-950/50 to-transparent" />
@@ -531,6 +635,7 @@ function Footer() {
           {/* Links */}
           <div className="flex flex-wrap gap-6 text-sm">
             <a href="#services" className="hover:text-moss-400 transition-colors">Services</a>
+            <a href="#work" className="hover:text-moss-400 transition-colors">Our Work</a>
             <a href="#about" className="hover:text-moss-400 transition-colors">About</a>
             <a href="#quote" className="hover:text-moss-400 transition-colors">Get a Quote</a>
             <a href="tel:3179799956" className="hover:text-moss-400 transition-colors">(317) 979-9956</a>
@@ -554,6 +659,7 @@ function App() {
       <main id="main">
         <Hero />
         <Services />
+        <OurWork />
         <About />
         <QuoteForm />
       </main>
